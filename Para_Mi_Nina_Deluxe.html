@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Mi Niña - Deluxe ❤️</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,sans-serif}
+body{overflow:hidden;background:linear-gradient(180deg,#060816,#11183a,#251f57);color:white}
+.hidden{display:none}
+.screen{height:100vh;display:flex;justify-content:center;align-items:center;padding:20px;text-align:center}
+.card{max-width:900px;width:100%;padding:40px;border-radius:35px;background:rgba(255,255,255,.08);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.15)}
+.star{position:fixed;background:white;border-radius:50%;animation:twinkle 3s infinite}
+@keyframes twinkle{50%{opacity:.2}}
+.moon{position:fixed;top:40px;right:60px;width:120px;height:120px;border-radius:50%;background:#fff;box-shadow:0 0 60px #fff}
+.heart{position:fixed;pointer-events:none;animation:float 8s linear forwards}
+@keyframes float{to{transform:translateY(-120vh);opacity:0}}
+.glow{animation:glow 2s infinite alternate}
+@keyframes glow{from{text-shadow:0 0 10px #ff8ab5}to{text-shadow:0 0 40px #fff,0 0 60px #ff8ab5}}
+.envelope{width:260px;height:170px;background:#ff8ab5;position:relative;margin:auto;border-radius:12px;cursor:pointer}
+.envelope:before{content:'';position:absolute;border-left:130px solid transparent;border-right:130px solid transparent;border-top:90px solid #ffc7db}
+.envelope span{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:42px}
+.reason{font-size:1.8rem;min-height:140px;display:flex;align-items:center;justify-content:center}
+.progress{height:12px;background:rgba(255,255,255,.15);border-radius:20px;overflow:hidden;margin:20px 0}
+.bar{height:100%;width:0;background:#ff6fae;transition:.5s}
+button{padding:14px 30px;border:none;border-radius:40px;background:#ff4f8f;color:white;font-size:18px;cursor:pointer;margin-top:20px}
+.buttons{position:relative;height:120px}
+#no{position:absolute;left:220px;background:#eee;color:black}
+#type{font-size:1.2rem;line-height:1.8;min-height:150px}
+.counter{font-size:1.1rem;color:#ffd6e5}
+</style>
+</head>
+<body>
+<div class="moon"></div>
+
+<section class="screen" id="welcome">
+<div class="card">
+<h1 class="glow">❤️ Para Mi Niña ❤️</h1><br>
+<p>He preparado algo especial solo para ti...</p><br>
+<div class="envelope" onclick="openLetter()"><span>💌</span></div>
+<p style="margin-top:20px">Toca el sobre para descubrirlo ✨</p>
+</div>
+</section>
+
+<section class="screen hidden" id="letter">
+<div class="card">
+<h2>🌷 Una carta para ti 🌷</h2><br>
+<div id="type"></div>
+<button id="startBtn" class="hidden" onclick="startReasons()">Ver 25 razones ❤️</button>
+</div>
+</section>
+
+<section class="screen hidden" id="reasonsScreen">
+<div class="card">
+<div class="counter" id="counter"></div>
+<div class="progress"><div class="bar" id="bar"></div></div>
+<div class="reason" id="reason"></div>
+<button onclick="nextReason()">Siguiente ➜</button>
+</div>
+</section>
+
+<section class="screen hidden" id="question">
+<div class="card">
+<h1 class="glow">❤️ Mi Niña ❤️</h1><br>
+<p style="font-size:1.4rem;line-height:1.8">
+Después de estas razones...<br><br>
+Hay algo que quiero preguntarte desde el fondo de mi corazón.
+<br><br>
+✨ ¿Te gustaría ser mi novia? ✨
+</p>
+<div class="buttons">
+<button onclick="accepted()">Sí ❤️</button>
+<button id="no">No 😅</button>
+</div>
+</div>
+</section>
+
+<section class="screen hidden" id="success">
+<div class="card">
+<h1 class="glow">💖✨</h1>
+<h2>¡Me haces muy feliz!</h2><br>
+<p style="font-size:1.25rem;line-height:1.8">
+Prometo seguir haciéndote sonreír y recordarte lo especial que eres para mí.
+<br><br>
+Gracias por estar aquí, mi niña. ❤️🌷
+</p>
+</div>
+</section>
+
+<script>
+for(let i=0;i<250;i++){
+let s=document.createElement('div');
+s.className='star';
+s.style.width=(Math.random()*3)+'px';
+s.style.height=s.style.width;
+s.style.left=(Math.random()*100)+'vw';
+s.style.top=(Math.random()*100)+'vh';
+document.body.appendChild(s);
+}
+
+document.addEventListener('mousemove',e=>{
+let h=document.createElement('div');
+h.className='heart';
+h.innerHTML='💖';
+h.style.left=e.clientX+'px';
+h.style.top=e.clientY+'px';
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),3000);
+});
+
+const text=`Mi niña...
+
+La distancia puede separarnos físicamente, pero nunca ha podido alejarte de mis pensamientos.
+
+Cada mensaje tuyo ilumina mis días y me recuerda lo especial que eres.
+
+Antes de preguntarte algo importante, quiero enseñarte algunas de las razones por las que me gustas tanto. ❤️`;
+
+let ti=0;
+function type(){
+if(ti<text.length){
+document.getElementById('type').innerHTML+=text.charAt(ti).replace(/\n/g,'<br>');
+ti++;
+setTimeout(type,35);
+}else{
+document.getElementById('startBtn').classList.remove('hidden');
+}
+}
+
+const reasons=[
+"Porque siempre espero tus mensajes.","Porque me haces sonreír sin darte cuenta.","Porque me gusta tu forma de ser.","Porque nuestras conversaciones alegran mis días.","Porque me gusta conocerte más cada día.","Porque una foto tuya puede alegrarme el día.","Porque siempre encuentro una razón para pensar en ti.","Porque me gusta saber cómo estuvo tu día.","Porque me haces sentir acompañado incluso en la distancia.","Porque me importa tu felicidad.","Porque me gusta tu manera de ver la vida.","Porque eres única para mí.","Porque me haces reír.","Porque me gusta compartir mis días contigo.","Porque siempre quiero saber más de ti.","Porque me inspiras a ser mejor.","Porque me gusta la confianza que tenemos.","Porque haces que la distancia parezca más pequeña.","Porque me haces ilusión.","Porque me haces sentir especial.","Porque me gusta imaginar momentos contigo.","Porque cada mensaje tuyo tiene valor para mí.","Porque vales muchísimo para mí.","Porque mi corazón te eligió.","Porque después de todo este tiempo sigo eligiéndote a ti."
+];
+
+let idx=0;
+
+function openLetter(){
+welcome.classList.add('hidden');
+letter.classList.remove('hidden');
+type();
+}
+
+function startReasons(){
+letter.classList.add('hidden');
+reasonsScreen.classList.remove('hidden');
+show();
+}
+
+function show(){
+counter.innerHTML='Razón '+(idx+1)+' de 25 ❤️';
+reason.innerHTML=reasons[idx];
+bar.style.width=((idx+1)/25*100)+'%';
+}
+
+function nextReason(){
+idx++;
+if(idx<reasons.length) show();
+else{
+reasonsScreen.classList.add('hidden');
+question.classList.remove('hidden');
+}
+}
+
+no.addEventListener('mouseover',()=>{
+no.style.left=(Math.random()*260)+'px';
+no.style.top=(Math.random()*80)+'px';
+});
+
+function accepted(){
+question.classList.add('hidden');
+success.classList.remove('hidden');
+for(let i=0;i<500;i++){
+setTimeout(()=>{
+let h=document.createElement('div');
+h.className='heart';
+h.innerHTML=Math.random()>.5?'❤️':'💖';
+h.style.left=(Math.random()*100)+'vw';
+h.style.bottom='-20px';
+h.style.fontSize=(20+Math.random()*35)+'px';
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),8000);
+},i*10);
+}
+}
+</script>
+</body>
+</html>
